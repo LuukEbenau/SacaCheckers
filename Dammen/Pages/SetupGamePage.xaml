@@ -1,0 +1,153 @@
+﻿<Page x:Class="Dammen.Pages.SetupGamePage" x:Name="setupgamepage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SetupGamePage">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v" />
+    </Page.Resources>
+    <StackPanel Orientation="Vertical" Background="AliceBlue">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="500">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <Label FontSize="30" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Content="Players" />
+                <Rectangle HorizontalAlignment="Stretch" Stroke="DimGray" StrokeDashArray="3 3" StrokeThickness="1" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150">
+                        <Label Content="Player 1" FontSize="22" HorizontalAlignment="Center" />
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Name:"></Label>
+                            <TextBox x:Name="tbP1Name" Grid.Column="2" HorizontalAlignment="Stretch" Text="player 1"></TextBox>
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Is AI?:"></Label>
+                            <CheckBox x:Name="rbP1IsAi" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3 0 0" Visibility="{Binding IsChecked,ElementName=rbP1IsAi,Converter={StaticResource b2v}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="AI Type:"></Label>
+                            <ComboBox x:Name="cbP1AIType" Grid.Column="2" HorizontalAlignment="Stretch"
+                                      SelectedValuePath="Key" DisplayMemberPath="Value" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Rectangle StrokeThickness="1" Stroke="DimGray" StrokeDashArray="3 7" HorizontalAlignment="Center" Margin="5 3 5 0" VerticalAlignment="Stretch" />
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150">
+                        <Label Content="Player 2" HorizontalAlignment="Center" FontSize="22" />
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Name:"></Label>
+                            <TextBox x:Name="tbP2Name" Grid.Column="2" HorizontalAlignment="Stretch" Text="player 2"></TextBox>
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Is AI?:"></Label>
+                            <CheckBox x:Name="rbP2IsAi" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        </Grid>
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3 0 0" Visibility="{Binding IsChecked,ElementName=rbP2IsAi,Converter={StaticResource b2v}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="AI Type:"></Label>
+                            <ComboBox x:Name="cbP2AIType" Grid.Column="2" HorizontalAlignment="Stretch"
+                                      SelectedValuePath="Key" DisplayMemberPath="Value" />
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0 10" Width="300">
+                <Label FontSize="30" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Content="Game" />
+                <Rectangle HorizontalAlignment="Stretch" Stroke="DimGray" StrokeDashArray="3 3" StrokeThickness="1" Margin="0 0 0 5" />
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Game type:" />
+                        <ComboBox IsEnabled="False"  x:Name="cbGameType" Grid.Column="2" HorizontalAlignment="Stretch"
+                                   SelectedValuePath="Key" DisplayMemberPath="Value" SelectionChanged="cbGameType_SelectionChanged" />
+                    </Grid>
+                    <StackPanel Margin="0 3 0 0" x:Name="GameOptionsNormalGameWrap">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Board type:" />
+                            <ComboBox IsEnabled="False" x:Name="cbBoardType" Grid.Column="2" HorizontalAlignment="Stretch"
+                                       SelectedValuePath="Key" DisplayMemberPath="Value" SelectionChanged="cbBoardType_SelectionChanged" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="BoardSizeWrap" Margin="0 3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Board size:" />
+                            <TextBox x:Name="tbBoardSize" Grid.Column="2" HorizontalAlignment="Stretch" PreviewTextInput="tb_PreviewTextInput" />
+                        </Grid>
+                    </StackPanel>
+
+                    <!--<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3 0 0" x:Name="CbScenarioSelectWrap">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Select scenario:" />
+                        <ComboBox IsEnabled="False" x:Name="CbScenarioSelect" Grid.Column="2" HorizontalAlignment="Stretch"
+                                   SelectedValuePath="Key" DisplayMemberPath="Value" />
+                    </Grid>-->
+
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Timer enabled?:" />
+                        <CheckBox Grid.Column="1" x:Name="cbTimerEnabled" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 3" Visibility="{Binding IsChecked,ElementName=cbTimerEnabled,Converter={StaticResource b2v}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Time(seconds):" />
+                        <TextBox x:Name="tbTimerInterval" Grid.Column="1" PreviewTextInput="tb_PreviewTextInput" HorizontalAlignment="Stretch" />
+                    </Grid>
+                </StackPanel>
+                <Button x:Name="btnStart" Content="Start!" FontSize="20" Padding="15 0 15 0" Margin="5 5 5 5" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="btnStart_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Page>

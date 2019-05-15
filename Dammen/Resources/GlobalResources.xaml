@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Dammen">
+    <ScaleTransform ScaleY="-1" x:Key="Transform" />
+    <ScaleTransform ScaleX="-1" x:Key="TransformX" />
+    <BooleanToVisibilityConverter x:Key="b2v" />
+    <BitmapImage x:Key="blackCheckerIcon" UriSource="pack://application:,,,/Dammen;component/img/zwarte_damsteen.png" />
+    <BitmapImage x:Key="whiteCheckerIcon" UriSource="pack://application:,,,/Dammen;component/img/witte_damsteen.png" />
+    <BitmapImage x:Key="attackMoveIcon" UriSource="pack://application:,,,/Dammen;component/img/attack_move_icon.png" />
+    <BitmapImage x:Key="attackMoveIconGreen" UriSource="pack://application:,,,/Dammen;component/img/attack_move_icon_green.png" />
+    <BitmapImage x:Key="walkMoveIcon" UriSource="pack://application:,,,/Dammen;component/img/walk_move_icon.png" />
+
+    <Style TargetType="FrameworkElement" x:Key="Square">
+        <Setter Property="Height" Value="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" />
+    </Style>
+</ResourceDictionary>

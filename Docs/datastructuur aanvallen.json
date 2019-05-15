@@ -1,0 +1,44 @@
+{
+	"StartLocation": {"X":4,"Y":4},
+	"Moves":[
+		{
+			"StartLocation": {"X":4,"Y":4},	
+			"EndLocation": {"X":6,"Y":2},
+			"Moves": [
+				{
+					"StartLocation": {"X":6,"Y":2},	
+					"EndLocation": {"X":4,"Y":0},
+					"Moves": [
+						{
+							"StartLocation": {"X":4,"Y":0},	
+							"EndLocation": {"X":2,"Y":2},
+							"Moves":[
+								{
+									"StartLocation": {"X":2,"Y":2},
+									"EndLocation" : {"X":0,"Y":4}
+								},
+								{
+									"StartLocation": {"X":2,"Y":2},
+									"EndLocation" : {"X":4,"Y":4},
+									"Moves" : [
+										{
+											"StartLocation": {"X":4,"Y":4},
+											"EndLocation" : {"X":2,"Y":6},
+											"Moves":[]//this is the end of the chain										
+										}
+									]							
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+
+		},
+		{
+
+		}
+	]
+}

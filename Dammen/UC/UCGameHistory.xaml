@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="Dammen.UC.UCGameHistory" x:Name="ucgamehistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Dammen.UC"
+            xmlns:Turn="clr-namespace:FunctionalLayer.GameTurn;assembly=FunctionalLayer"
+             mc:Ignorable="d"
+
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <DataTemplate x:Key="ModelTemplate" DataType="Model:Model">
+            <Grid
+        LayoutTransform="{StaticResource Transform}"
+        Tag="{Binding Path=Id}"
+        Background="Transparent">
+                <Border
+            Name="border"
+            Background="#2a3345"
+            BorderThickness="0"
+            CornerRadius="10"
+            Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                    ShadowDepth="0"
+                    Opacity="0.8"
+                    BlurRadius="10" />
+                    </Border.Effect>
+                    <Grid
+                Height="100"
+                Width="280"
+                Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                    Grid.Column="1"
+                    Text="{Binding Path=Title}"
+                    TextOptions.TextRenderingMode="ClearType"
+                    TextOptions.TextFormattingMode="Display"
+                    Foreground="White"
+                    FontFamily="Arial"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    Margin="2,4,4,2"
+                    TextWrapping="Wrap"
+                    TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Path=Message}"
+                    TextOptions.TextRenderingMode="ClearType"
+                    TextOptions.TextFormattingMode="Display"
+                    Foreground="White"
+                    FontFamily="Arial"
+                    VerticalAlignment="Center"
+                    Margin="2,2,4,4"
+                    TextWrapping="Wrap"
+                    TextTrimming="CharacterEllipsis" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplateVerticalAlignment">
+            <StackPanel VerticalAlignment="Bottom" LayoutTransform="{StaticResource Transform}" />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
+    <Border Style="{StaticResource TurnHistory_Border}">
+        <Grid MinWidth="100" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Style="{StaticResource TurnHistory_DoneTurnsStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalAlignment="Stretch" Background="{StaticResource TurnHistory_HeaderBackground}" VerticalAlignment="Stretch">
+                <Label Content="History" FontSize="22" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
+            <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="IcGameTurns" ItemsPanel="{StaticResource ItemsPanelTemplateVerticalAlignment}" VerticalAlignment="Top" VerticalContentAlignment="Stretch"  ItemsSource="{Binding TurnHistory,ElementName=ucgamehistory}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type Turn:DoneTurn}">
+                        <!-- LayoutTransform="{StaticResource Transform}" is used for double flip, the entire itemscontrol gets flipped, and the items get flipped back.
+                            in this way we can hack prepending items to the list while in reality its the end of the list-->
+                        <Grid MouseEnter="DoneTurn_MouseEnter" LayoutTransform="{StaticResource Transform}" Style="{StaticResource TurnHistory_DoneTurnItemStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0" Background="{StaticResource TurnHistory_Header}" HorizontalAlignment="Stretch">
+                                <Image Width="20" Height="20" Margin="5 5 0 5" HorizontalAlignment="Left">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Player.PlayerColor}" Value="Light">
+                                                    <Setter Property="Source" Value="{StaticResource whiteCheckerIcon}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Player.PlayerColor}" Value="Dark">
+                                                    <Setter Property="Source" Value="{StaticResource blackCheckerIcon}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <TextBlock Grid.Column="0" FontSize="20" HorizontalAlignment="Center">
+                                Turn <TextBlock HorizontalAlignment="Right" Text="{Binding TurnNumber}" />
+                            </TextBlock>
+                            </Grid>
+                                <ItemsControl x:Name="IcTurnMoves" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" ItemsSource="{Binding DoneMoves}" HorizontalAlignment="Stretch">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type Turn:Move}">
+                                        <Grid Background="{StaticResource TurnHistory_Row}" MouseEnter="Row_MouseEnter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <StackPanel Orientation="Horizontal" Margin="0 5 0 5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <Label Content="{Binding StartLocation}" />
+                                                <Image Height="25"  Width="25">
+                                                    <Image.Style>
+                                                        <Style TargetType="Image">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding MovementType}" Value="Attack">
+                                                                    <Setter Property="Source" Value="{StaticResource attackMoveIcon}"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding MovementType}" Value="Move">
+                                                                    <Setter Property="Source" Value="{StaticResource walkMoveIcon}"></Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Image.Style>
+                                                </Image>
+                                                <Label Content="{Binding EndLocation}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+    </Border>
+</UserControl>

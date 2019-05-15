@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Dammen.UC.UCCheckersBoard" x:Name="uccheckersboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Dammen.UC"
+             mc:Ignorable="d" Width="auto">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Grid x:Name="boardWrap">
+        <ItemsControl x:Name="board" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Board.Tiles,ElementName=uccheckersboard}" BorderBrush="SaddleBrown" BorderThickness="20">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Columns="10" Rows="10">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:UCTile x:Name="tile" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tile="{Binding}" AllowDrop="True" Drop="tile_Drop" 
+                                      MouseEnter="tile_MouseEnter" MouseLeave="tile_MouseLeave" DragDropStarted="tile_DragDropStarted" 
+                                      DragDropFinished="tile_DragDropFinished" MouseDown="tile_MouseDown"/>
+                    </ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

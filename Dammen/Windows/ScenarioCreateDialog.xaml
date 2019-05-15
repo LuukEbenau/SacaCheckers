@@ -1,0 +1,17 @@
+﻿<Window x:Class="Dammen.Windows.ScenarioCreateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dammen.Windows" WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d"
+        Width="200" Height="150"
+        Title="ScenarioCreateDialog" >
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Label FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top">Scenario name</Label>
+            <TextBox x:Name="TbScenarioName" HorizontalAlignment="Stretch"/>
+            <Button Padding="5" Margin="5" FontSize="16" FontWeight="DemiBold" Click="Button_Click">Save scenario</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

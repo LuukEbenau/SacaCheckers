@@ -1,0 +1,153 @@
+﻿<Page x:Class="Dammen.Pages.GamePage" x:Name="gamepage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Dammen.Pages"
+      xmlns:UC="clr-namespace:Dammen.UC"
+      xmlns:Turn="clr-namespace:FunctionalLayer.GameTurn;assembly=FunctionalLayer"
+      mc:Ignorable="d"
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="GamePage">
+    <Page.Resources>
+        <BitmapImage x:Key="redDiagonalLine" UriSource="pack://application:,,,/Dammen;component/img/red_diagonal_line.png" />
+        <BitmapImage x:Key="arrow" UriSource="pack://application:,,,/Dammen;component/img/arrow.gif" />
+
+        <Style x:Key="PauseResumeButton" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Game.Paused,ElementName=gamepage}" Value="true">
+                    <Setter Property="Content" Value="Resume" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Game.Paused,ElementName=gamepage}" Value="false">
+                    <Setter Property="Content" Value="Pause" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="player1TurnArrow" TargetType="Image">
+            <Style.Setters>
+                <Setter Property="Height" Value="100" />
+                <Setter Property="Visibility" Value="{Binding Game.Player1IsCurrentlyPlaying, ElementName=gamepage, Converter={StaticResource b2v}}" />
+                <Setter Property="Source" Value="{StaticResource arrow}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="player2TurnArrow" TargetType="Image">
+            <Style.Setters>
+                <Setter Property="Height" Value="100" />
+                <Setter Property="Visibility" Value="{Binding Game.Player2IsCurrentlyPlaying, ElementName=gamepage, Converter={StaticResource b2v}}" />
+                <Setter Property="LayoutTransform" Value="{StaticResource TransformX}" />
+                <Setter Property="Source" Value="{StaticResource arrow}" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="player1NormalCheckerIcon" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Game.Player1.PlayerColor,ElementName=gamepage}" Value="Light">
+                    <Setter Property="Source" Value="{StaticResource whiteCheckerIcon}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Game.Player1.PlayerColor,ElementName=gamepage}" Value="Dark">
+                    <Setter Property="Source" Value="{StaticResource blackCheckerIcon}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="player2NormalCheckerIcon" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Game.Player2.PlayerColor,ElementName=gamepage}" Value="Light">
+                    <Setter Property="Source" Value="{StaticResource whiteCheckerIcon}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Game.Player2.PlayerColor,ElementName=gamepage}" Value="Dark">
+                    <Setter Property="Source" Value="{StaticResource blackCheckerIcon}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="180*" />
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+        <!--Player 1 left header block-->
+        <DockPanel Background="{StaticResource HeaderBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Image HorizontalAlignment="Right" Margin="0 0 5 0" VerticalAlignment="Center" Height="30" Width="30" Style="{StaticResource player1NormalCheckerIcon}" />
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30" x:Name="p1Name" Text="{Binding Game.Player1.Name ,ElementName=gamepage}" />
+                </StackPanel>
+                <Image HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0" Style="{StaticResource player1TurnArrow}" />
+            </StackPanel>
+        </DockPanel>
+        <!--Center header block-->
+        <Grid HorizontalAlignment="Stretch" Background="{StaticResource HeaderBackground}" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Height="261">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <Label Content="Lost Checkers" FontSize="30" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 0 0 10">
+                    <Grid Width="30" Height="30">
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource player1NormalCheckerIcon}" />
+                        <Image HorizontalAlignment="Stretch" Margin="4" VerticalAlignment="Stretch" Source="{StaticResource redDiagonalLine}" />
+                    </Grid>
+
+                    <Label x:Name="lblP1LostCheckers" FontSize="28" Content="{Binding Game.Player1AmountOfLostChecker,ElementName=gamepage}" />
+                    <Label FontSize="28" Content="-"></Label>
+                    <Label x:Name="lblP2LostCheckers" FontSize="28" Content="{Binding Game.Player2AmountOfLostChecker,ElementName=gamepage}" />
+
+                    <Grid Width="30" Height="30">
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource player2NormalCheckerIcon}" />
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" Source="{StaticResource redDiagonalLine}" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Visibility="{Binding Game.ScoreShown,ElementName=gamepage,Converter={StaticResource b2v}}" HorizontalAlignment="Center" Orientation="Vertical">
+                    <TextBlock FontSize="30" HorizontalAlignment="Center" Text="Score" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock FontSize="28">
+                            <TextBlock Text="{Binding Game.P1Score,ElementName=gamepage}" />
+                            -
+                            <TextBlock Text="{Binding Game.P2Score,ElementName=gamepage}" />
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <!-- -->
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Visibility="{Binding Game.TimerEnabled,ElementName=gamepage,Converter={StaticResource b2v}}">
+                    <Label FontSize="30" HorizontalContentAlignment="Center" Content="Time Left" />
+                    <TextBlock HorizontalAlignment="Center" FontSize="20">
+                        <TextBlock Text="{Binding Game.TurnTimerSecondsLeft, ElementName=gamepage}" />s
+                    </TextBlock>
+                    <Button x:Name="btnPause" Click="btnPause_Click" Style="{StaticResource PauseResumeButton}" HorizontalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <!--Player 2 right header block-->
+        <DockPanel Background="{StaticResource HeaderBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" x:Name="p2Name" Text="{Binding Game.Player2.Name ,ElementName=gamepage}" />
+                    <Image HorizontalAlignment="Left" Margin="5 0 0 0" VerticalAlignment="Center" Height="30" Width="30" Style="{StaticResource player2NormalCheckerIcon}" />
+                </StackPanel>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Style="{StaticResource player2TurnArrow}" />
+            </StackPanel>
+        </DockPanel>
+
+        <UC:UCCheckersBoard Style="{StaticResource Square}" Board="{Binding Game.Board,ElementName=gamepage}" Grid.Column="1" Grid.Row="1" x:Name="board" VerticalAlignment="Top" HorizontalAlignment="Stretch" />
+        <UC:UCGameHistory TurnHoverEnter="UCGameHistory_HistoryItemHoverEnter" TurnHoverLeave="UCGameHistory_HistoryItemHoverLeave"  Grid.Row="1" Grid.Column="2" MaxHeight="{Binding Height,ElementName=board}" TurnHistory="{Binding Game.TurnHistory,ElementName=gamepage}" />
+        <!--Footer center block-->
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Button x:Name="btnGiveUp" Background="IndianRed" HorizontalAlignment="Right" Margin="8" Padding="10" FontSize="16" Content="Surrender" Click="btnGiveUp_Click" />
+                <TextBlock HorizontalAlignment="Center" DockPanel.Dock="Top" FontSize="22" VerticalAlignment="Center">
+                   <Label VerticalContentAlignment="Center" Content="Turn:" />
+                    <Label x:Name="lblTurnNumber" VerticalContentAlignment="Center" Content="{Binding Game.Turn,ElementName=gamepage,Mode=OneWay}" />
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
