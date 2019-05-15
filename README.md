@@ -3,7 +3,7 @@
 This project is a project I've made for my study earlier in 2018, and I decided I decided to put it here on github, to perhaps help some people.
 
 Sacacheckers is a Checkers (Droughts) game, made in WPF. 
-##Main goals & Features:
+## Main goals & Features:
  -Singleplayer 1v1
  -Singleplayer vs AI (currently I have an AI using the minimax algorithm & alpha beta pruning, optimized using multiple threads.)
  -Playback of the moves in the game afterwards
