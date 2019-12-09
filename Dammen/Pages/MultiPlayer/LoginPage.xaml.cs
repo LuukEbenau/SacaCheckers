@@ -28,7 +28,7 @@ namespace Dammen.Pages.MultiPlayer
 		private ILogger Logger => App.container.Get<ILogger>();
 		private Authorization Auth = App.container.Resolve<Authorization>();
 
-		private const string _googleClientID = "827572789438-tjea1i12q6f677k1me77taf1cbvs773o.apps.googleusercontent.com";
+		private string GoogleClientID => Environment.GetEnvironmentVariable("SC_GOOGLE_CID");
 		public LoginPage()
         {
             InitializeComponent();
