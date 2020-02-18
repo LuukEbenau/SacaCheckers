@@ -50,10 +50,10 @@
       <HintPath>..\packages\SacaDev.Configuration.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="SacaDev.Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Diagnostics.1.0.0-CI-20181111-214654\lib\netstandard2.0\SacaDev.Diagnostics.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Diagnostics.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="SacaDev.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Util.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Util.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Util.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Util.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.5.4.0\lib\net45\ServiceStack.dll</HintPath>

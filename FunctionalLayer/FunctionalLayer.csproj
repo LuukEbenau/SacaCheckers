@@ -40,17 +40,20 @@
     <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SacaDev, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SacaDev.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.dll</HintPath>
+    </Reference>
     <Reference Include="SacaDev.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Api.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Api.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Api.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Api.dll</HintPath>
     </Reference>
     <Reference Include="SacaDev.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Configuration.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Configuration.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Configuration.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="SacaDev.Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Diagnostics.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Diagnostics.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Diagnostics.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="SacaDev.Util, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SacaDev.Util.1.0.0-CI-20181110-212746\lib\netstandard2.0\SacaDev.Util.dll</HintPath>
+      <HintPath>..\packages\SacaDev.Util.1.0.0-CI-20190112-215525\lib\netstandard2.0\SacaDev.Util.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.5.4.0\lib\net45\ServiceStack.dll</HintPath>
